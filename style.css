@@ -1,0 +1,191 @@
+/* Base Styles */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #0f0f0f;
+  color: #ffffff;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-weight: bold;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.btn-main {
+  background-color: #00ffaa;
+  color: #000;
+}
+.btn-main:hover {
+  background-color: #00dd99;
+  box-shadow: 0 0 10px #00ffaa;
+}
+.btn-learn {
+  background-color: #ffffff;
+  color: #000;
+}
+.btn-learn:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 0 10px #fff;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: #1a1a1a;
+}
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+.hero p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* About Section */
+.about {
+  padding: 60px 20px;
+  background-color: #121212;
+  text-align: center;
+}
+.about a {
+  color: #00ffaa;
+  text-decoration: none;
+}
+.about a:hover {
+  text-decoration: underline;
+}
+
+/* Courses Section */
+.courses {
+  padding: 60px 20px;
+  background-color: #181818;
+  text-align: center;
+}
+.course-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.course-card {
+  background-color: #222;
+  border-radius: 15px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+/* Contact Section */
+.contact {
+  background-color: #111;
+  padding: 60px 20px;
+  text-align: center;
+}
+.contact form {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.contact input,
+.contact textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+/* Footer */
+.footer {
+  background-color: #000;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #aaa;
+}
+/* ----- COURSE PAGE STYLES ----- */
+
+/* Course Roadmap */
+.course-progress {
+  background-color: #1a1a1a;
+  padding: 40px 20px;
+  text-align: center;
+}
+.steps {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: auto;
+}
+.steps li {
+  background: #292929;
+  margin: 10px 0;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* Lessons Grid */
+.lessons {
+  padding: 60px 20px;
+  background: #121212;
+  text-align: center;
+}
+.lesson-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.lesson-card {
+  background: #222;
+  padding: 20px;
+  border-radius: 15px;
+  width: 280px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.05);
+}
+.lesson-card h3 {
+  margin-top: 0;
+}
+
+/* Lesson Page Styles */
+.lesson-video, .lesson-notes, .quiz {
+  padding: 40px 20px;
+  background: #111;
+  margin: 30px auto;
+  max-width: 800px;
+  border-radius: 10px;
+}
+.lesson-video iframe {
+  width: 100%;
+  max-width: 600px;
+  border: none;
+}
+.lesson-notes ul {
+  text-align: left;
+  max-width: 600px;
+  margin: auto;
+}
+.quiz form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.quiz input, .quiz textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #222;
+  color: #fff;
+}
+.quiz label {
+  font-weight: bold;
+}
