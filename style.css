@@ -189,3 +189,112 @@ body {
 .quiz label {
   font-weight: bold;
 }
+.course-body {
+  background: #f7f9fb;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+  color: #222;
+}
+
+.course-container {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.quiz-form input[type="radio"] {
+  margin-right: 8px;
+}
+
+.submit-btn {
+  background-color: #0077ff;
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 15px;
+}
+
+.submit-btn:hover {
+  background-color: #005ce6;
+}
+
+.lesson-nav {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-btn {
+  text-decoration: none;
+  background: #222;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.nav-btn:hover {
+  background: #444;
+}
+.lesson-info {
+  background: #eaf6ff;
+  border-left: 5px solid #0077ff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.lesson-info h2 {
+  color: #005bb5;
+}
+
+.lesson-info ul {
+  list-style: square inside;
+}
+
+.lesson-video iframe {
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.nav-buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-btn {
+  text-decoration: none;
+  background: linear-gradient(to right, #0077ff, #00bbff);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 119, 255, 0.3);
+}
+
+.nav-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #0055cc, #0099cc);
+  box-shadow: 0 6px 15px rgba(0, 119, 255, 0.5);
+}
+.info-box {
+  background-color: #1c1d1d;
+  padding: 20px;
+  border-left: 6px solid #0077ff;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.lesson-video iframe {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
