@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generate Certificate | Rayopro7 Academy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="course-page">
+  <div class="container">
+    <h1>🎓 Get Your Certificate</h1>
+    
+    <form id="certForm">
+      <label>Enter your name:</label><br>
+      <input type="text" id="studentName" required><br><br>
+
+      <label>Select Course:</label><br>
+      <select id="courseName">
+        <option value="Python Programming">Python Programming</option>
+        <option value="HTML & CSS Basics">HTML & CSS Basics</option>
+        <option value="Web Development">Web Development</option>
+      </select><br><br>
+
+      <button type="submit">Generate Certificate</button>
+    </form>
+
+    <p id="statusMessage"></p>
+  </div>
+
+  <script src="cert-script.js"></script>
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+
+</body>
+</html>
