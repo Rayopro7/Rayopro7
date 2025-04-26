@@ -5,6 +5,93 @@
   <title>Generate Certificate | Rayopro7 Academy</title>
   <link rel="stylesheet" href="style.css">
 </head>
+<style>
+  body {
+    background: #0f0f0f;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 30px;
+    margin: 0;
+  }
+
+  .container {
+    max-width: 500px;
+    margin: auto;
+    background: #181818;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #00ffaa50;
+    text-align: center;
+  }
+
+  .container h1 {
+    margin-bottom: 20px;
+    color: #00ffaa;
+    font-size: 28px;
+  }
+
+  form input, form select {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  form button {
+    background: #00ffaa;
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+  }
+
+  form button:hover {
+    background: #00ddaa;
+    transform: scale(1.05);
+  }
+
+  #statusMessage {
+    margin-top: 20px;
+    color: #00ffaa;
+    font-weight: bold;
+  }
+
+  /* 🔥 Mobile Responsive Settings */
+  @media (max-width: 600px) {
+    body {
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      padding: 20px;
+      box-shadow: 0 0 5px #00ffaa50;
+    }
+
+    .container h1 {
+      font-size: 22px;
+    }
+
+    form input, form select {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    form button {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+</style>
+
 <body class="course-page">
   <div class="container">
     <h1>🎓 Get Your Certificate</h1>

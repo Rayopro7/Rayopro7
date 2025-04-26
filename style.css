@@ -359,3 +359,42 @@ form button:hover {
   color: #00ffaa;
   font-weight: bold;
 }
+.nav-buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  text-decoration: none;
+  background: linear-gradient(to right, #0077ff, #00bbff);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 119, 255, 0.3);
+  margin: 10px;
+}
+
+.nav-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #0055cc, #0099cc);
+  box-shadow: 0 6px 15px rgba(0, 119, 255, 0.5);
+}
+
+/* 🔥 Mobile Responsive for Buttons */
+@media (max-width: 600px) {
+  .nav-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-btn {
+    width: 80%;
+    text-align: center;
+    padding: 14px;
+    font-size: 16px;
+  }
+}
