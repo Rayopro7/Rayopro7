@@ -5,6 +5,22 @@
   <title>🎓 You Did It!</title>
   <link rel="stylesheet" href="../style.css" />
   <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <script>
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+if (user) {
+  user.progress = { python: 100 };
+  user.completedCourses = ["Python Programming"];
+  localStorage.setItem('currentUser', JSON.stringify(user));
+
+  let allStudents = JSON.parse(localStorage.getItem('students')) || [];
+  const index = allStudents.findIndex(s => s.email === user.email);
+  if (index !== -1) {
+    allStudents[index] = user;
+    localStorage.setItem('students', JSON.stringify(allStudents));
+  }
+}
+
+  </script>
   <style>
     body {
       background: #0f0f0f;

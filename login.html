@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Rayopro7 Academy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="course-page">
+
+<div class="container">
+  <h1>🎓 Login to Rayopro7 Academy</h1>
+
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Your Email" required><br><br>
+    <input type="password" id="password" placeholder="Your Password" required><br><br>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p style="margin-top: 20px;">Don't have an account? 
+    <a href="signup.html" style="color: #00ffaa; text-decoration: underline;">Sign Up Here</a>
+  </p>
+</div>
+
+<script>
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    let students = JSON.parse(localStorage.getItem('students')) || [];
+
+    const user = students.find(student => student.email === email && student.password === password);
+
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      window.location.href = "dashboard.html";
+    } else {
+      alert("❌ Invalid email or password! Please try again.");
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
+

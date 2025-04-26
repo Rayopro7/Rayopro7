@@ -398,3 +398,23 @@ form button:hover {
     font-size: 16px;
   }
 }
+.course-page {
+  background: #0f0f0f;
+}
+
+.certificate-button {
+  display: inline-block;
+  background: #2ecc71;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.certificate-button:hover {
+  background: #27ae60;
+  transform: scale(1.05);
+}

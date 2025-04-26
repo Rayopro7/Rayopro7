@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | Rayopro7 Academy</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      background: #0f0f0f;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #181818;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 20px;
+      color: #00ffaa;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      margin: 10px 0;
+      display: block;
+      padding: 10px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background: #00ffaa;
+      color: #000;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      background: #121212;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    .course-card {
+      background: #181818;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 255, 170, 0.2);
+    }
+
+    .progress-bar {
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 20px;
+      margin-top: 10px;
+    }
+
+    .progress-bar-inner {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(to right, #00ffaa, #00bbff);
+      transition: width 1s;
+    }
+
+    .course-status {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .start-btn {
+      margin-top: 10px;
+      display: inline-block;
+      background: #00ffaa;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .start-btn:hover {
+      background: #00ddaa;
+    }
+
+    .locked {
+      opacity: 0.5;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .info-box {
+      background: #181818;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(0, 255, 170, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      .main-content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>Rayopro7</h2>
+  <a href="#dashboard">🏠 Dashboard</a>
+  <a href="profile.html">⚙️ Profile Settings</a>
+  <a href="funzone.html">🎉 Fun Zone</a>
+  <a href="admin.html">👑 Admin Panel</a>
+  <a href="login.html" onclick="logout()">🚪 Logout</a>
+</div>
+
+<div class="main-content" id="dashboard">
+
+  <h1 id="welcomeMessage">Welcome!</h1>
+
+  <section id="courses">
+    <h2>📚 Your Courses</h2>
+
+    <!-- Python Course -->
+    <div class="course-card">
+      <h3>🐍 Python Programming</h3>
+      <div class="progress-bar">
+        <div class="progress-bar-inner" id="pythonProgress"></div>
+      </div>
+      <div class="course-status" id="pythonStatus"></div>
+      <a id="startPythonBtn" href="courses/python.html" class="start-btn">Start Learning</a>
+    </div>
+
+    <!-- HTML & CSS Course (Locked) -->
+    <div class="course-card locked">
+      <h3>🌐 HTML & CSS Basics (Coming Soon)</h3>
+      <div class="progress-bar">
+        <div class="progress-bar-inner" style="width: 0%;"></div>
+      </div>
+      <div class="course-status">🔒 Locked</div>
+    </div>
+
+    <!-- Web Development Course (Locked) -->
+    <div class="course-card locked">
+      <h3>💻 Web Development (Coming Soon)</h3>
+      <div class="progress-bar">
+        <div class="progress-bar-inner" style="width: 0%;"></div>
+      </div>
+      <div class="course-status">🔒 Locked</div>
+    </div>
+
+  </section>
+
+  <section id="certificates">
+    <h2>🏆 Your Certificates</h2>
+    <div id="certificateLinks" class="info-box"></div>
+  </section>
+
+  <section id="challenge">
+    <h2>🎯 Today's Challenge</h2>
+    <div class="info-box">
+      Write a Python program that checks if a number is prime! 🔥
+    </div>
+  </section>
+
+  <section id="tip">
+    <h2>🔥 Coding Tip of the Day</h2>
+    <div class="info-box">
+      "Always comment your code. Your future self will thank you!" 💬
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+
+  if (user) {
+    document.getElementById("welcomeMessage").innerText = `Welcome back, ${user.name}! 🎓`;
+
+    const pythonProgress = document.getElementById("pythonProgress");
+    const pythonStatus = document.getElementById("pythonStatus");
+    const startBtn = document.getElementById("startPythonBtn");
+    const certificates = document.getElementById("certificateLinks");
+
+    // Read real progress if saved
+    let progress = user.progress ? user.progress.python || 0 : 0;
+
+    pythonProgress.style.width = `${progress}%`;
+
+    if (progress === 100) {
+      pythonStatus.innerText = "✅ Completed";
+      certificates.innerHTML = `<a href="../certificate.html" class="start-btn">Download Python Certificate</a>`;
+      startBtn.innerText = "Review Course";
+      startBtn.href = "courses/python.html";
+    } else {
+      pythonStatus.innerText = "Progress: " + progress + "%";
+      certificates.innerHTML = `<p>No courses completed yet. Keep Learning! 💪</p>`;
+    }
+  } else {
+    window.location.href = "login.html"; // If not logged in, go back to login
+  }
+
+  function logout() {
+    localStorage.removeItem('currentUser');
+  }
+</script>
+
+</body>
+</html>
+
+

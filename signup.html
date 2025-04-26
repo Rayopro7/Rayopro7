@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup | Rayopro7 Academy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="course-page">
+
+<div class="container">
+  <h1>🎓 Create Your Account</h1>
+
+  <form id="signupForm">
+    <input type="text" id="name" placeholder="Your Name" required><br><br>
+    <input type="email" id="email" placeholder="Your Email" required><br><br>
+    <input type="password" id="password" placeholder="Create Password" required><br><br>
+
+    <button type="submit">Sign Up</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById("signupForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    let students = JSON.parse(localStorage.getItem('students')) || [];
+
+    const student = { name, email, password, completedCourses: [] }; // store completed courses too!
+
+    // Save
+    students.push(student);
+    localStorage.setItem('students', JSON.stringify(students));
+    localStorage.setItem('currentUser', JSON.stringify(student));
+
+    window.location.href = "dashboard.html";
+  });
+</script>
+
+</body>
+</html>
+

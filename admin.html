@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel | Rayopro7 Academy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="course-page">
+
+<div class="container">
+  <h1>👑 Admin Panel</h1>
+
+  <h2>Registered Students:</h2>
+  <ul id="studentList"></ul>
+
+  <br>
+  <a href="dashboard.html" class="nav-btn">Back to Dashboard</a>
+
+</div>
+
+<script>
+  let students = JSON.parse(localStorage.getItem('students')) || [];
+  const studentList = document.getElementById("studentList");
+
+  if (students.length > 0) {
+    students.forEach(student => {
+      const li = document.createElement("li");
+      li.innerHTML = `<strong>${student.name}</strong> | ${student.email}`;
+      studentList.appendChild(li);
+    });
+  } else {
+    studentList.innerHTML = "<p>No students found yet.</p>";
+  }
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+  
+  // Check if user is logged in and is admin
+  if (!user || user.email !== "ryankariuki131@gmail.com") {
+    alert("❌ Access Denied. You are not the Admin!");
+    window.location.href = "dashboard.html"; // Redirect back to dashboard
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile Settings | Rayopro7 Academy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="course-page">
+
+<div class="container">
+  <h1>🛠️ Profile Settings</h1>
+
+  <form id="profileForm">
+    <label>Name:</label><br>
+    <input type="text" id="name" required><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" id="email" required><br><br>
+
+    <label>Password:</label><br>
+    <input type="password" id="password" required><br><br>
+
+    <button type="submit">Update Profile</button>
+  </form>
+</div>
+
+<script>
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+
+  if (user) {
+    document.getElementById("name").value = user.name;
+    document.getElementById("email").value = user.email;
+    document.getElementById("password").value = user.password;
+  } else {
+    window.location.href = "login.html";
+  }
+
+  document.getElementById("profileForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const updatedName = document.getElementById("name").value;
+    const updatedEmail = document.getElementById("email").value;
+    const updatedPassword = document.getElementById("password").value;
+
+    let students = JSON.parse(localStorage.getItem('students')) || [];
+    const index = students.findIndex(student => student.email === user.email);
+
+    if (index !== -1) {
+      students[index].name = updatedName;
+      students[index].email = updatedEmail;
+      students[index].password = updatedPassword;
+    }
+
+    // Update current user
+    const updatedUser = {
+      name: updatedName,
+      email: updatedEmail,
+      password: updatedPassword,
+      completedCourses: user.completedCourses || []
+    };
+
+    students[index] = updatedUser;
+    localStorage.setItem('students', JSON.stringify(students));
+    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+
+    alert("✅ Profile updated successfully!");
+    window.location.href = "dashboard.html";
+  });
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fun Zone | Rayopro7 Academy</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #0f0f0f;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .fun-card {
+      background: #181818;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0, 255, 170, 0.2);
+      position: relative;
+    }
+
+    .fun-card.locked {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .fun-card h3 {
+      margin: 0;
+    }
+
+    .locked-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ff5555;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8em;
+    }
+
+    .nav-btn {
+      margin-top: 30px;
+      display: inline-block;
+      background: #00ffaa;
+      color: black;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: #00ddaa;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🎉 Welcome to the Fun Zone!</h1>
+
+  <p style="margin-top: 20px;">Take a break and have some fun with these cool challenges and mini-games! 🎮🧠</p>
+
+  <!-- Fun Zone Cards -->
+  <div class="fun-card">
+    <h3>🔢 Python Math Challenge</h3>
+    <p>Test your Python skills with a math puzzle!</p>
+    <a href="#" class="nav-btn">Start Challenge</a>
+  </div>
+
+  <div class="fun-card locked">
+    <h3>🧠 Build a Calculator (Coming Soon)</h3>
+    <div class="locked-badge">🔒 Locked</div>
+    <p>Challenge yourself to build a simple calculator using Python.</p>
+  </div>
+
+  <div class="fun-card locked">
+    <h3>🎮 Mini-Game: Code Runner (Coming Soon)</h3>
+    <div class="locked-badge">🔒 Locked</div>
+    <p>Complete code challenges to win the game!</p>
+  </div>
+
+  <div class="fun-card locked">
+    <h3>🤔 Riddles and Brain Teasers (Coming Soon)</h3>
+    <div class="locked-badge">🔒 Locked</div>
+    <p>Boost your brain power with fun puzzles!</p>
+  </div>
+
+  <br>
+  <a href="dashboard.html" class="nav-btn">Back to Dashboard</a>
+</div>
+
+</body>
+</html>
+
