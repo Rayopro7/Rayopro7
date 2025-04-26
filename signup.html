@@ -21,23 +21,39 @@
 
 <script>
   document.getElementById("signupForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-    let students = JSON.parse(localStorage.getItem('students')) || [];
+  let students = JSON.parse(localStorage.getItem('students')) || [];
 
-    const student = { name, email, password, completedCourses: [] }; // store completed courses too!
+  // Check if email already exists
+  const exists = students.find(student => student.email === email);
 
-    // Save
-    students.push(student);
+  if (exists) {
+    alert("❌ Email already registered. Please login instead.");
+    window.location.href = "login.html";
+  } else {
+    // Create new student
+    const newStudent = {
+      name: name,
+      email: email,
+      password: password,
+      completedCourses: [],
+      progress: { python: 0 }
+    };
+
+    students.push(newStudent);
     localStorage.setItem('students', JSON.stringify(students));
-    localStorage.setItem('currentUser', JSON.stringify(student));
+    localStorage.setItem('currentUser', JSON.stringify(newStudent));
 
+    alert("✅ Registration successful!");
     window.location.href = "dashboard.html";
-  });
+  }
+});
+
 </script>
 
 </body>
