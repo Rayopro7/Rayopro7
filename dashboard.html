@@ -197,38 +197,39 @@
 </div>
 
 <script>
-  const user = JSON.parse(localStorage.getItem('currentUser'));
+  auth.onAuthStateChanged(async user => {
+    if (!user) return window.location.href = 'login.html';
 
-  if (user) {
-    document.getElementById("welcomeMessage").innerText = `Welcome back, ${user.name}! 🎓`;
+    // Fetch user record
+    const doc = await db.collection('users').doc(user.uid).get();
+    if (!doc.exists) return alert('No profile found');
+    const data = doc.data();
 
-    const pythonProgress = document.getElementById("pythonProgress");
-    const pythonStatus = document.getElementById("pythonStatus");
-    const startBtn = document.getElementById("startPythonBtn");
-    const certificates = document.getElementById("certificateLinks");
+    // Display name
+    document.getElementById('welcomeMessage').innerText = 
+      `Welcome back, ${data.name}! 🎓`;
 
-    // Read real progress if saved
-    let progress = user.progress ? user.progress.python || 0 : 0;
+    // Set progress bar
+    const prog = data.progress.python || 0;
+    document.getElementById('pythonProgress').style.width = `${prog}%`;
+    document.getElementById('pythonStatus').innerText = 
+      prog === 100 ? '✅ Completed' : `Progress: ${prog}%`;
 
-    pythonProgress.style.width = `${progress}%`;
-
-    if (progress === 100) {
-      pythonStatus.innerText = "✅ Completed";
-      certificates.innerHTML = `<a href="../certificate.html" class="start-btn">Download Python Certificate</a>`;
-      startBtn.innerText = "Review Course";
-      startBtn.href = "courses/python.html";
+    // Certificates
+    const certDiv = document.getElementById('certificateLinks');
+    if (prog === 100) {
+      certDiv.innerHTML = 
+        `<a href="certificate.html" class="start-btn">Download Python Certificate</a>`;
     } else {
-      pythonStatus.innerText = "Progress: " + progress + "%";
-      certificates.innerHTML = `<p>No courses completed yet. Keep Learning! 💪</p>`;
+      certDiv.innerHTML = `<p>No courses completed yet. Keep Learning! 💪</p>`;
     }
-  } else {
-    window.location.href = "login.html"; // If not logged in, go back to login
-  }
+  });
 
   function logout() {
-    localStorage.removeItem('currentUser');
+    auth.signOut().then(() => window.location.href = 'login.html');
   }
 </script>
+
 
 </body>
 </html>

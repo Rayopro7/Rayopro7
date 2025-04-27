@@ -20,41 +20,56 @@
 </div>
 
 <script>
-  document.getElementById("signupForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+  const signupForm = document.getElementById('signupForm');
 
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  signupForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const name  = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const pass  = document.getElementById('password').value;
 
-  let students = JSON.parse(localStorage.getItem('students')) || [];
+    try {
+      // Create user in Firebase Auth
+      const { user } = await auth.createUserWithEmailAndPassword(email, pass);
 
-  // Check if email already exists
-  const exists = students.find(student => student.email === email);
+      // Save profile & progress in Firestore
+      await db.collection('users').doc(user.uid).set({
+        name,
+        email,
+        progress: { python: 0 },
+        completedCourses: []
+      });
 
-  if (exists) {
-    alert("❌ Email already registered. Please login instead.");
-    window.location.href = "login.html";
-  } else {
-    // Create new student
-    const newStudent = {
-      name: name,
-      email: email,
-      password: password,
-      completedCourses: [],
-      progress: { python: 0 }
-    };
-
-    students.push(newStudent);
-    localStorage.setItem('students', JSON.stringify(students));
-    localStorage.setItem('currentUser', JSON.stringify(newStudent));
-
-    alert("✅ Registration successful!");
-    window.location.href = "dashboard.html";
-  }
-});
-
+      // Redirect to dashboard
+      window.location.href = 'dashboard.html';
+    } catch(err) {
+      alert('Signup failed: ' + err.message);
+    }
+  });
 </script>
+
+
+<!-- Firebase App (core) -->
+<script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-app.js"></script>
+<!-- Firebase Auth -->
+<script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-auth.js"></script>
+<!-- Firebase Firestore -->
+<script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-firestore.js"></script>
+
+<script>
+  // 1) Replace with your actual config from Firebase console → Project Settings
+  const firebaseConfig = {
+    apiKey: "AIzaSyAo9_wgopj8ava2BZVqGtqjvPiGNkLd_Pw",
+    authDomain: "rayopro7-academy.firebaseapp.com",
+    projectId: "rayopro7-academy",
+    // ...other keys
+  };
+  // 2) Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db   = firebase.firestore();
+</script>
+
 
 </body>
 </html>

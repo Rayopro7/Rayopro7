@@ -432,3 +432,89 @@ form button:hover {
     padding: 15px;
   }
 }
+
+/* Mobile Responsive Improvements */
+@media (max-width: 768px) {
+  /* Base Styles */
+  body {
+    padding: 15px;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 50px 15px;
+  }
+  
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  /* Course Cards */
+  .course-card {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  /* Form Elements */
+  form input, 
+  form select {
+    width: 100%;
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 15px;
+  }
+
+  /* Container */
+  .container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  /* Buttons */
+  .btn {
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    font-size: 16px;
+  }
+
+  /* Dashboard Layout */
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    flex-direction: row;
+    justify-content: space-around;
+    z-index: 100;
+  }
+
+  .sidebar a {
+    margin: 0;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .main-content {
+    margin-bottom: 70px;
+    padding: 15px;
+  }
+
+  /* Lesson Video */
+  .lesson-video iframe {
+    height: 200px;
+  }
+}
+
+/* Small Phone Improvements */
+@media (max-width: 320px) {
+  .hero h1 {
+    font-size: 24px;
+  }
+  
+  .sidebar a {
+    font-size: 12px;
+    padding: 8px;
+  }
+}

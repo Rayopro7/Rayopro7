@@ -1,46 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login | Rayopro7 Academy</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Rayopro7 Academy</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="course-page">
 
 <div class="container">
-  <h1>🎓 Login to Rayopro7 Academy</h1>
+    <h1>🎓 Login to Rayopro7 Academy</h1>
 
-  <form id="loginForm">
-    <input type="email" id="email" placeholder="Your Email" required><br><br>
-    <input type="password" id="password" placeholder="Your Password" required><br><br>
+    <form id="loginForm">
+        <input type="email" id="email" placeholder="Your Email" required>
+        <input type="password" id="password" placeholder="Your Password" required>
+        
+        <div class="form-group">
+            <input type="checkbox" id="rememberMe">
+            <label for="rememberMe">Remember me</label>
+        </div>
 
-    <button type="submit">Login</button>
-  </form>
+        <div id="errorMessage" class="error-message" style="display: none; color: #ff4444; margin: 10px 0;"></div>
+        <div id="loadingSpinner" class="loading-spinner" style="display: none;">Loading...</div>
 
-  <p style="margin-top: 20px;">Don't have an account? 
-    <a href="signup.html" style="color: #00ffaa; text-decoration: underline;">Sign Up Here</a>
-  </p>
+        <button type="submit" id="loginButton">Login</button>
+    </form>
+
+    <div class="auth-links">
+        <p>
+            <a href="#" id="forgotPassword" style="color: #00ffaa; text-decoration: underline;">Forgot Password?</a>
+        </p>
+        <p>Don't have an account? 
+            <a href="signup.html" style="color: #00ffaa; text-decoration: underline;">Sign Up Here</a>
+        </p>
+    </div>
 </div>
 
-<script>
-  document.getElementById("loginForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.24.0/firebase-app.js";
+    import { 
+        getAuth, 
+        signInWithEmailAndPassword,
+        setPersistence,
+        browserLocalPersistence,
+        browserSessionPersistence,
+        sendPasswordResetEmail
+    } from "https://www.gstatic.com/firebasejs/9.24.0/firebase-auth.js";
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAo9_wgopj8ava2BZVqGtqjvPiGNkLd_Pw",
+        authDomain: "rayopro7-academy.firebaseapp.com",
+        projectId: "rayopro7-academy",
+        storageBucket: "rayopro7-academy.appspot.com",
+        messagingSenderId: "473143198992",
+        appId: "1:473143198992:web:9cd9e0d5536ee7ad501195"
+    };
 
-    let students = JSON.parse(localStorage.getItem('students')) || [];
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-    const user = students.find(student => student.email === email && student.password === password);
+    // UI Elements
+    const loginForm = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('errorMessage');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const loginButton = document.getElementById('loginButton');
+    const rememberMe = document.getElementById('rememberMe');
+    const forgotPassword = document.getElementById('forgotPassword');
 
-    if (user) {
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      window.location.href = "dashboard.html";
-    } else {
-      alert("❌ Invalid email or password! Please try again.");
-    }
-  });
+    // Show error message function
+    const showError = (message) => {
+        errorMessage.textContent = message;
+        errorMessage.style.display = 'block';
+        loadingSpinner.style.display = 'none';
+        loginButton.disabled = false;
+    };
+
+    // Handle login
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Show loading state
+        errorMessage.style.display = 'none';
+        loadingSpinner.style.display = 'block';
+        loginButton.disabled = true;
+
+        try {
+            // Set persistence based on remember me checkbox
+            await setPersistence(auth, 
+                rememberMe.checked ? browserLocalPersistence : browserSessionPersistence
+            );
+
+            // Attempt login
+            await signInWithEmailAndPassword(auth, email, password);
+            window.location.href = 'dashboard.html';
+        } catch (error) {
+            let errorMsg = 'Login failed. Please check your credentials.';
+            
+            switch (error.code) {
+                case 'auth/user-not-found':
+                    errorMsg = 'No account found with this email.';
+                    break;
+                case 'auth/wrong-password':
+                    errorMsg = 'Incorrect password.';
+                    break;
+                case 'auth/too-many-requests':
+                    errorMsg = 'Too many failed attempts. Please try again later.';
+                    break;
+                case 'auth/network-request-failed':
+                    errorMsg = 'Network error. Please check your connection.';
+                    break;
+                case 'auth/invalid-email':
+                    errorMsg = 'Please enter a valid email address.';
+                    break;
+                case 'auth/user-disabled':
+                    errorMsg = 'This account has been disabled. Please contact support.';
+                    break;
+            }
+            
+            showError(errorMsg);
+        }
+    });
+
+    // Handle forgot password
+    forgotPassword.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+
+        if (!email) {
+            showError('Please enter your email address first.');
+            return;
+        }
+
+        try {
+            await sendPasswordResetEmail(auth, email);
+            alert('Password reset email sent! Please check your inbox.');
+        } catch (error) {
+            showError('Failed to send reset email. Please try again.');
+        }
+    });
 </script>
+
+<style>
+    .loading-spinner {
+        color: #00ffaa;
+        margin: 10px 0;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #00ffaa;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        to {transform: rotate(360deg);}
+    }
+
+    .form-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 10px 0;
+    }
+
+    .auth-links {
+        margin-top: 20px;
+    }
+
+    .error-message {
+        background: rgba(255, 0, 0, 0.1);
+        border-left: 3px solid #ff4444;
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+    button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+</style>
 
 </body>
 </html>
